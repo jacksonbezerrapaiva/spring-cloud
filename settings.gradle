@@ -2,3 +2,4 @@
 rootProject.name = 'eco'
 
 include 'configservice'
+include 'hystrix'

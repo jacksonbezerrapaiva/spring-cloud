@@ -21,3 +21,11 @@ services:
       test: "exit 0"
     ports:
       - "8888:8888"
+  hystrix:
+    build: hystrix
+    healthcheck:
+      test: "exit 0"
+    ports:
+      - "9999:9999"
+    depends_on:
+      - consul1
