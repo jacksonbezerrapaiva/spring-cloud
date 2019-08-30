@@ -21,3 +21,11 @@ services:
       - consul
     links:
       - consul:consul
+  dashboard:
+    build: dashboard
+    ports:
+      - "9998:9998"
+    depends_on:
+      - consul
+    links:
+      - consul:consul
