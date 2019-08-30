@@ -1,31 +1,23 @@
-version: '2.3'
+version: '2.2'
 services:
-  consul1:
-    image: "consul"
-    container_name: "consul1"
-    environment:
-      - "CONSUL_LOCAL_CONFIG={\"disable_update_check\": true}"
-      - "CONSUL_BIND_INTERFACE=eth0"
-      #   - "CONSUL_HTTP_ADDR=0.0.0.0"
-    hostname: "consul1"
+  consul:
+    image: consul:latest
     ports:
-      - "8301:8301"
       - "8400:8400"
       - "8500:8500"
-      - "8600:53/udp"
-    # command: "agent -server -bootstrap -ui -client=0.0.0.0 -bind='{{ GetPrivateIP }}'"
-    command: "agent -server -bootstrap -ui -client=0.0.0.0 -bind='{{ GetInterfaceIP \"eth0\" }}'"
-  configservice:
-    build: configservice
-    healthcheck:
-      test: "exit 0"
-    ports:
-      - "8888:8888"
+      - "8600:8600"
+      - "8600:8600/udp"
+#  configservice:
+#    build: configservice
+#    healthcheck:
+#      test: "exit 0"
+#    ports:
+#      - "8888:8888"
   hystrix:
     build: hystrix
-    healthcheck:
-      test: "exit 0"
     ports:
-      - "9999:9999"
+      - "8888:8888"
     depends_on:
-      - consul1
+      - consul
+    links:
+      - consul:consul

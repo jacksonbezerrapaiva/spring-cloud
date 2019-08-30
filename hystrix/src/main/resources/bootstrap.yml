@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    consul:
+#      discovery:
+#        prefer-ip-address: true
+#      host: consul
+#      port: 8500
+#      config:
+#        enabled: true
+#        watch:
+#          enabled: false
+  application:
+    name: hystrix
